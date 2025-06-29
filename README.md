@@ -8,14 +8,14 @@ A modular, theme-aware, and highly customizable Android settings screen builder 
 
 ## 🚀 Features
 
-- ✅ Kotlin DSL to define settings quickly
-- 🎨 Theme-aware (Material3 support)
-- 🔍 Built-in search bar to filter settings
-- 🧠 Validation rules for input fields
-- 🛠 Persistent storage via SharedPreferences
-- 🔗 Supports dependency logic (planned)
-- 🎛️ Switch, List, Slider, TextInput, Action items
-- 📁 Category headers and grouping
+- ✅ **Kotlin DSL** to define settings quickly
+- 🎨 **Theme-aware** (Material3 support)
+- 🔍 **Built-in search bar** to filter settings
+- 🧠 **Validation rules** for input fields
+- 🛠 **Persistent storage** via SharedPreferences
+- 🔗 **Supports dependency logic** (planned)
+- 🎛️ **Switch, List, Slider, TextInput, Action** items
+- 📁 **Category headers** and grouping
 
 ---
 
@@ -32,18 +32,23 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
     }
 }
+```
 
-Step 2 – Add the dependency to your app's build.gradle.kts
+### Step 2 – Add the dependency to your app's `build.gradle.kts`
 
 ```kotlin
 dependencies {
     implementation("com.github.rohitdahale:SettingsDSL:v1.0.0")
 }
+```
 
-📦 Published via JitPack
+📦 **Published via JitPack**
 
+---
 
-✨ Usage Example
+## ✨ Usage Example
+
+```kotlin
 val settings = settings {
     category("Appearance") {
         switch("dark_mode", "Dark Mode") {
@@ -54,18 +59,18 @@ val settings = settings {
                 // Handle theme toggle
             }
         }
-
+        
         list("language", "Language", listOf("English", "Hindi", "Spanish"), "English") {
             description = "Choose your preferred language"
             icon = R.drawable.ic_language
         }
-
+        
         slider("font_size", "Font Size", 12f, 24f, 16f) {
             description = "Adjust text size"
             unit = "sp"
         }
     }
-
+    
     category("Account") {
         textInput("username", "Username") {
             hint = "Enter your name"
@@ -77,7 +82,7 @@ val settings = settings {
                 }
             }
         }
-
+        
         action("logout", "Log Out") {
             description = "Sign out of your account"
             icon = R.drawable.ic_logout
@@ -88,29 +93,67 @@ val settings = settings {
         }
     }
 }
+```
 
-🔍 Search Support
-Just add a TextInputEditText and wire it to the adapter:
+---
+
+## 🔍 Search Support
+
+Just add a `TextInputEditText` and wire it to the adapter:
+
+```kotlin
 searchEditText.addTextChangedListener {
     adapter.filter(it.toString())
 }
+```
 
-🎨 Theme Support
+---
+
+## 🎨 Theme Support
+
 Theme-aware components automatically adjust based on your current Material Theme. To apply changes:
 
+```kotlin
 switch("dark_mode", "Dark Mode") {
     onChanged = {
         recreate() // Apply theme
     }
 }
+```
 
-🧪 Test App Demo
-Use the :app module in the GitHub repo as a live testbed. It uses:
+---
 
-Material3
+## 🧪 Test App Demo
 
-Dynamic categories
+Use the `:app` module in the GitHub repo as a live testbed. It uses:
 
-SharedPreferences storage
+- Material3
+- Dynamic categories
+- SharedPreferences storage
+- Full UI adapter
 
-Full UI adapter
+---
+
+## 📝 License
+
+This project is licensed under the **MIT License**. See the LICENSE file for details.
+
+---
+
+## 🙌 Contribute
+
+PRs, issues, and stars are always welcome! If you'd like to add features like:
+
+- Setting dependencies (enable/disable based on others)
+- Remote config support
+- JSON import/export
+
+Feel free to open a discussion or send a pull request! Happy hacking! 💻✨
+
+---
+
+## 🧑‍💻 Author
+
+Built with ❤️ by **@rohitdahale**
+
+If you use it, feel free to give a ⭐ to support!
